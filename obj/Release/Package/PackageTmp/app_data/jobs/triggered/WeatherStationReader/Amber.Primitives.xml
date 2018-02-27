@@ -1,0 +1,656 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Amber.Primitives</name>
+    </assembly>
+    <members>
+        <member name="T:Amber.Primitives.Collections.TaskQueue">
+            <summary>
+            Lightweight queue of work to ensure sequential non-overlapping execution.
+            </summary>
+        </member>
+        <member name="M:Amber.Primitives.Collections.TaskQueue.Enqueue``1(System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Enqueue an item of work, to be completed when queue is free
+            </summary>
+            <typeparam name="T">Type to return</typeparam>
+            <param name="taskGenerator">Factory to generate task upon availability to start work</param>
+            <returns>Task to await on to receive result</returns>
+        </member>
+        <member name="M:Amber.Primitives.Collections.TaskQueue.Enqueue(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Enqueue an item of work, to be completed when queue is free
+            </summary>
+            <param name="taskGenerator">Factory to generate task upon availability to start work</param>
+            <returns>Task to await on to receive result</returns>
+        </member>
+        <member name="T:Amber.Primitives.Interfaces.ITableCsvConvertable">
+            <summary>
+            An object that can be written to a csv file as a row
+            </summary>
+        </member>
+        <member name="M:Amber.Primitives.Monads.MaybeExtensions.DefaultIfNothing``1(Amber.Primitives.Monads.IMaybe{``0},``0)">
+            <summary>
+            Returns a default value if this Maybe contains Nothing.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="m"></param>
+            <param name="defaultValue">The default value to use.
+            The calling code must ensure it is not null for reference types!</param>
+            <returns></returns>
+        </member>
+        <member name="M:Amber.Primitives.Monads.MaybeExtensions.DefaultIfNothing``1(Amber.Primitives.Monads.IMaybe{``0},Amber.Primitives.Monads.IMaybe{``0})">
+            <summary>
+            Returns a default value if this Maybe contains Nothing.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="m"></param>
+            <param name="nothingValue">The default value to use.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Amber.Primitives.Monads.MaybeExtensions.DefaultIfNothing``1(Amber.Primitives.Monads.IMaybe{``0},System.Func{``0})">
+            <summary>
+            Returns a lazily-evaluated default value if this Maybe contains Nothing.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="m"></param>
+            <param name="nothingReturn">A function to produce a default value, called lazily only if this contains Nothing.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Amber.Primitives.Monads.MaybeExtensions.DefaultIfNothing``1(Amber.Primitives.Monads.IMaybe{``0},System.Func{Amber.Primitives.Monads.IMaybe{``0}})">
+            <summary>
+            Returns a lazily-evaluated default value if this Maybe contains Nothing.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="m"></param>
+            <param name="nothingReturn">A function to produce a default value, called lazily only if this contains Nothing.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Amber.Primitives.Range.TranslateFrom(Amber.Primitives.Range,System.Single)">
+            <summary>
+            Translates a value from another range to a corresponding value in this range 
+            by a basic linear map.
+            </summary>
+            <param name="target">The source range</param>
+            <param name="valueInSource">The value in the source range to translate to this range</param>
+            <returns>The corresponding value in this range</returns>
+        </member>
+        <member name="M:Amber.Primitives.Range.TranslateTo(Amber.Primitives.Range,System.Single)">
+            <summary>
+            Translates a value in this range to a corresponding value in another range 
+            by a basic linear map.
+            </summary>
+            <param name="target">The target range</param>
+            <param name="valueInSource">The value in this range to translate to the target range</param>
+            <returns>The corresponding value in the target range</returns>
+        </member>
+        <member name="F:Amber.BasicLogHandlerConfig.DEFAULT_TIMESTAMP_FORMAT">
+            <summary>
+            The default format used by the basic log handler when <see cref="F:Amber.BasicLogHandlerConfig.IncludeTimestamps"/> is <c>true</c> and no
+            <see cref="F:Amber.BasicLogHandlerConfig.CustomTimestampFormat"/> has been provided.
+            </summary>
+        </member>
+        <member name="F:Amber.BasicLogHandlerConfig.MinimumSeverity">
+            <summary>
+            Minimum severity level for messages to be processed. Messages that are sent with a lower severity will be ignored by the handler.
+            </summary>
+        </member>
+        <member name="F:Amber.BasicLogHandlerConfig.IncludeTimestamps">
+            <summary>
+            Whether or not the log handler should append timestamps to the beginning of every message.
+            </summary>
+        </member>
+        <member name="F:Amber.BasicLogHandlerConfig.IncludeFileSource">
+            <summary>
+            Whether or not the log handler should append the filename of the code that sent a given log message.
+            </summary>
+        </member>
+        <member name="F:Amber.BasicLogHandlerConfig.IncludeMemberSource">
+            <summary>
+            Whether or not the log handler should append the member name (e.g. function/property name) of the code that
+            sent a given log message.
+            </summary>
+        </member>
+        <member name="F:Amber.BasicLogHandlerConfig.MaxDataObjectLines">
+            <summary>
+            Max number of fields/values that will be enumerated for given data objects. If greater than zero, 
+            data objects' members will be enumerated and each one output on a separate line (up to the maximum). 
+            If zero, only the summary of data objects will be displayed.
+            </summary>
+        </member>
+        <member name="F:Amber.BasicLogHandlerConfig.ExpandExceptionStackTraces">
+            <summary>
+            Whether or not the log handler should expand pass-in exception objects to display their associated stack traces.
+            If true, stack traces will be shown below the corresponding log message.
+            If false, only the summary (messages) of passed-in exceptions will be displayed.
+            </summary>
+        </member>
+        <member name="F:Amber.BasicLogHandlerConfig.CustomTimestampFormat">
+            <summary>
+            Custom timestamp format for appended timestamps. If this field is <c>null</c>, the default timestamp format
+            (<see cref="F:Amber.BasicLogHandlerConfig.DEFAULT_TIMESTAMP_FORMAT"/>) will be used.
+            </summary>
+        </member>
+        <member name="M:Amber.BasicLogHandlerConfig.#ctor(Amber.LoggerSeverity,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            Creates a new configuration for a <see cref="T:Amber.BasicLogHandler"/> (such as <see cref="T:Amber.ConsoleWriterLogHandler"/> or
+            <see cref="T:Amber.FileWriterLogHandler"/>).
+            </summary>
+            <param name="minimumSeverity">Minimum severity level for messages to be processed. Messages that are sent with a lower severity will be ignored by the handler.</param>
+            <param name="includeTimestamps">Whether or not the log handler should append timestamps to the beginning of every message.</param>
+            <param name="includeFileSource">Whether or not the log handler should append 
+            the filename of the code that sent a given log message.</param>
+            <param name="includeMemberSource">Whether or not the log handler should append the member name 
+            (e.g. function/property name) of the code that sent a given log message.</param>
+            <param name="maxDataObjectLines">Max number of fields/values that will be enumerated for given data objects. If greater than zero,
+            data objects' members will be enumerated and each one output on a separate line (up to the maximum).
+            If zero, only the summary of data objects will be displayed.</param>
+            <param name="expandExceptionStackTraces">Whether or not the log handler should expand pass-in exception objects to 
+            display their associated stack traces. If true, stack traces will be shown below the corresponding log message.
+            If false, only the summary (messages) of passed-in exceptions will be displayed.</param>
+        </member>
+        <member name="M:Amber.BasicLogHandlerConfig.#ctor(Amber.LoggerSeverity,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Boolean,System.String)">
+            <summary>
+            Creates a new configuration for a <see cref="T:Amber.BasicLogHandler"/> (such as <see cref="T:Amber.ConsoleWriterLogHandler"/> or
+            <see cref="T:Amber.FileWriterLogHandler"/>).
+            </summary>
+            <param name="minimumSeverity">Minimum severity level for messages to be processed. Messages that are sent with a lower severity will be ignored by the handler.</param>
+            <param name="includeTimestamps">Whether or not the log handler should append timestamps to the beginning of every message.</param>
+            <param name="includeFileSource">Whether or not the log handler should append 
+            the filename of the code that sent a given log message.</param>
+            <param name="includeMemberSource">Whether or not the log handler should append the member name 
+            (e.g. function/property name) of the code that sent a given log message.</param>
+            <param name="maxDataObjectLines">Max number of fields/values that will be enumerated for given data objects. If greater than zero,
+            data objects' members will be enumerated and each one output on a separate line (up to the maximum).
+            If zero, only the summary of data objects will be displayed.</param>
+            <param name="expandExceptionStackTraces">Whether or not the log handler should expand pass-in exception objects to 
+            display their associated stack traces. If true, stack traces will be shown below the corresponding log message.
+            If false, only the summary (messages) of passed-in exceptions will be displayed.</param>
+            <param name="customTimestampFormat">Custom timestamp format for appended timestamps. If this field is <c>null</c>,
+            the default timestamp format (<see cref="F:Amber.BasicLogHandlerConfig.DEFAULT_TIMESTAMP_FORMAT"/>) will be used.</param>
+        </member>
+        <member name="T:Amber.ConsoleWriterLogHandler">
+            <summary>
+            An <see cref="T:Amber.ILogMessageHandler"/> that simply writes all received log messages to the <see cref="T:System.Console"/>.
+            </summary>
+        </member>
+        <member name="M:Amber.ConsoleWriterLogHandler.#ctor">
+            <summary>
+            Creates a console writer with the default console writer configuration (reduced line noise, some information
+            is not included for clarity's sake).
+            </summary>
+        </member>
+        <member name="M:Amber.ConsoleWriterLogHandler.#ctor(Amber.LoggerSeverity)">
+            <summary>
+            Creates a console writer with the default console writer configuration (reduced line noise, some information
+            is not included for clarity's sake) and a specified minimum severity level.
+            </summary>
+            <param name="minimumSeverity">The minimum severity level of messages to log. Messages with a lower severity
+            level will be ignored.</param>
+        </member>
+        <member name="M:Amber.ConsoleWriterLogHandler.#ctor(Amber.BasicLogHandlerConfig)">
+            <summary>
+            Creates a console writer with the given custom configuration.
+            </summary>
+            <param name="configuration">The configuration to use that specifies how messages will be displayed on the console.</param>
+        </member>
+        <member name="T:Amber.EnumerationRequestDataWrapper">
+            <summary>
+            A class wrapping a 'data' object that has been supplied in a <see cref="T:Amber.Log"/> call where the caller has specified
+            that the log handler should enumerate the wrapped <see cref="F:Amber.EnumerationRequestDataWrapper.Enumerable"/>.
+            </summary>
+        </member>
+        <member name="F:Amber.EnumerationRequestDataWrapper.Enumerable">
+            <summary>
+            The <see cref="T:System.Collections.IEnumerable"/> that the caller has requested be enumerated by the log handler.
+            </summary>
+        </member>
+        <member name="T:Amber.FileWriterLogHandler">
+            <summary>
+            An <see cref="T:Amber.ILogMessageHandler"/> that simply writes all received log messages to a given file.
+            </summary>
+        </member>
+        <member name="P:Amber.FileWriterLogHandler.AutoFlush">
+            <summary>
+            Whether or not data is automatically flushed to the underlying file as soon as it is received. Defaults to <c>true</c>.
+            </summary>
+        </member>
+        <member name="M:Amber.FileWriterLogHandler.#ctor(System.String)">
+            <summary>
+            Creates a default file writer that writes to the given file path with the default file writer configuration
+            (writes all data, very verbose). If the file already exists, it will be appended to.
+            </summary>
+            <param name="filePath">The file to write to. Must be a valid and existing directory path, 
+            but the file itself does not need to exist. If the file does exist, it will be appended to.</param>
+        </member>
+        <member name="M:Amber.FileWriterLogHandler.#ctor(System.String,System.Boolean)">
+            <summary>
+            Creates a default file writer that writes to the given file path with the default file writer configuration
+            (writes all data, very verbose). If the file already exists, the value passed in to <paramref name="overwrite"/>
+            will specify the behaviour of this handler.
+            </summary>
+            <param name="filePath">The file to write to. Must be a valid and existing directory path, 
+            but the file itself does not need to exist. If the file does exist, it will be appended to.</param>
+            <param name="overwrite">If the file exists and this value is <c>true</c>, the file will be overwritten.
+            If <c>false</c>, the file will be appended to.</param>
+        </member>
+        <member name="M:Amber.FileWriterLogHandler.#ctor(System.String,Amber.LoggerSeverity)">
+            <summary>
+            Creates a default file writer that writes to the given file path with the default file writer configuration
+            (writes all data, very verbose) and a specified minimum severity level. If the file already exists, it will be appended to.
+            </summary>
+            <param name="filePath">The file to write to. Must be a valid and existing directory path, 
+            but the file itself does not need to exist. If the file does exist, it will be appended to.</param>
+            <param name="minimumSeverity">The minimum severity level of messages to log. Messages with a lower severity
+            level will be ignored.</param>
+        </member>
+        <member name="M:Amber.FileWriterLogHandler.#ctor(System.String,System.Boolean,Amber.LoggerSeverity)">
+            <summary>
+            Creates a default file writer that writes to the given file path with the default file writer configuration
+            (writes all data, very verbose) and a specified minimum severity level.
+            </summary>
+            <param name="filePath">The file to write to. Must be a valid and existing directory path, 
+            but the file itself does not need to exist. If the file does exist, it will be appended to.</param>
+            <param name="overwrite">If the file exists and this value is <c>true</c>, the file will be overwritten.
+            If <c>false</c>, the file will be appended to.</param>
+            <param name="minimumSeverity">The minimum severity level of messages to log. Messages with a lower severity
+            level will be ignored.</param>
+        </member>
+        <member name="M:Amber.FileWriterLogHandler.#ctor(System.String,Amber.BasicLogHandlerConfig)">
+            <summary>
+            Creates a default file writer that writes to the given file path with the default file writer configuration
+            (writes all data, very verbose). If the file already exists, it will be appended to.
+            </summary>
+            <param name="filePath">The file to write to. Must be a valid and existing directory path, 
+            but the file itself does not need to exist. If the file does exist, it will be appended to.</param>
+            <param name="configuration">The configuration to use that specifies how messages will be written to the file.</param>
+        </member>
+        <member name="M:Amber.FileWriterLogHandler.#ctor(System.String,System.Boolean,Amber.BasicLogHandlerConfig)">
+            <summary>
+            Creates a default file writer that writes to the given file path with the default file writer configuration
+            (writes all data, very verbose).
+            </summary>
+            <param name="filePath">The file to write to. Must be a valid and existing directory path, 
+            but the file itself does not need to exist. If the file does exist, it will be appended to.</param>
+            <param name="overwrite">If the file exists and this value is <c>true</c>, the file will be overwritten.
+            If <c>false</c>, the file will be appended to.</param>
+            <param name="configuration">The configuration to use that specifies how messages will be written to the file.</param>
+        </member>
+        <member name="T:Amber.LoggerHandlerRemovalToken">
+            <summary>
+            A token representing a previously-added action-handler for the <see cref="T:Amber.Log"/>.
+            Can be passed to <see cref="M:Amber.Log.RemoveHandler(Amber.LoggerHandlerRemovalToken)"/>.
+            </summary>
+        </member>
+        <member name="T:Amber.BasicLogHandler">
+            <summary>
+            An <see cref="T:Amber.ILogMessageHandler"/> handler that preprocesses <see cref="T:Amber.Log"/> messages according to
+            a given <see cref="F:Amber.BasicLogHandler.Configuration"/>.
+            
+            Child classes only need to implement <see cref="M:Amber.BasicLogHandler.HandleMessage(System.String)"/> to use the processed log messages.
+            </summary>
+        </member>
+        <member name="F:Amber.BasicLogHandler.Configuration">
+            <summary>
+            The configuration for this log handler.
+            </summary>
+        </member>
+        <member name="M:Amber.BasicLogHandler.#ctor(Amber.BasicLogHandlerConfig)">
+            <summary>
+            Create this <see cref="T:Amber.BasicLogHandler"/> and set its <see cref="F:Amber.BasicLogHandler.Configuration"/> to the given <paramref name="configuration"/>.
+            </summary>
+            <param name="configuration">The configuration to use for this handler.</param>
+        </member>
+        <member name="M:Amber.BasicLogHandler.HandleMessage(System.String)">
+            <summary>
+            Called by the base class (<see cref="T:Amber.BasicLogHandler"/>) when a message has been processed.
+            </summary>
+            <param name="message">The processed message to handle.</param>
+        </member>
+        <member name="M:Amber.Log.AddHandler(System.Action{System.String})">
+            <summary>
+            Add a simple log handler that performs the given action with every processed message, using a default logger configuration
+            that includes all data.
+            </summary>
+            <param name="handler">The action to perform for every log message. Must not be null.</param>
+            <returns>A removal token that can be used to unregister the handler later 
+            (with <see cref="M:Amber.Log.RemoveHandler(Amber.LoggerHandlerRemovalToken)"/>).</returns>
+        </member>
+        <member name="M:Amber.Log.AddHandler(System.Action{System.String},Amber.LoggerSeverity)">
+            <summary>
+            Add a simple log handler that performs the given action with every processed message, using a default logger configuration
+            that includes all data at or above the given <paramref name="minimumSeverity"/>.
+            </summary>
+            <param name="handler">The action to perform for every log message. Must not be null.</param>
+            <param name="minimumSeverity">The minimum severity level of messages to log. Messages with a lower severity
+            level will not be passed to the <paramref name="handler"/> action.</param>
+            <returns>A removal token that can be used to unregister the handler later 
+            (with <see cref="M:Amber.Log.RemoveHandler(Amber.LoggerHandlerRemovalToken)"/>).</returns>
+        </member>
+        <member name="M:Amber.Log.AddHandler(System.Action{System.String},Amber.BasicLogHandlerConfig)">
+            <summary>
+            Add a simple log handler that performs the given action with every processed message; specifying a configuration
+            object that specifies how the messages are preprocessed before being passed to <paramref name="handler"/>.
+            </summary>
+            <param name="handler">The action to perform for every log message. Must not be null.</param>
+            <param name="preprocessingConfig">A configuration object that specifies how messages should be preprocessed
+            before being passed to the given <paramref name="handler"/>.</param>
+            <returns>A removal token that can be used to unregister the handler later 
+            (with <see cref="M:Amber.Log.RemoveHandler(Amber.LoggerHandlerRemovalToken)"/>).</returns>
+        </member>
+        <member name="M:Amber.Log.RemoveHandler(Amber.LoggerHandlerRemovalToken)">
+            <summary>
+            Removes a simple-action handler that was previously created with a call to <see cref="M:Amber.Log.AddHandler(System.Action{System.String})"/>
+            or one of its overloads.
+            </summary>
+            <param name="token">The token representing the previously added handler.</param>
+        </member>
+        <member name="M:Amber.Log.AddHandler(Amber.ILogMessageHandler)">
+            <summary>
+            Add a custom log message handler.
+            </summary>
+            <seealso cref="T:Amber.ConsoleWriterLogHandler"/>
+            <seealso cref="T:Amber.FileWriterLogHandler"/>
+            <param name="handler">The handler to add. Must not be null.</param>
+        </member>
+        <member name="M:Amber.Log.RemoveHandler(Amber.ILogMessageHandler)">
+            <summary>
+            Remove a previously added custom log message handler.
+            </summary>
+            <param name="handler">The handler to remove. Must not be null, and must be currently added.</param>
+        </member>
+        <member name="M:Amber.Log.Debug(System.String,System.Object,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Debug"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Debug(System.String,System.Object,System.Boolean,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Debug"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Debug(System.String,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Debug"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Debug(System.String,System.Object,System.Boolean,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Debug"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Info(System.String,System.Object,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Info"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Info(System.String,System.Object,System.Boolean,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Info"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Info(System.String,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Info"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Info(System.String,System.Object,System.Boolean,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Info"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Warn(System.String,System.Object,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Warning"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Warn(System.String,System.Object,System.Boolean,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Warning"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Warn(System.String,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Warning"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Warn(System.String,System.Object,System.Boolean,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Warning"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Error(System.String,System.Object,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Error"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Error(System.String,System.Object,System.Boolean,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Error"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Error(System.String,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Error"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Error(System.String,System.Object,System.Boolean,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Error"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Fatal(System.String,System.Object,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Fatal"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Fatal(System.String,System.Object,System.Boolean,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Fatal"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Fatal(System.String,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Fatal"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="M:Amber.Log.Fatal(System.String,System.Object,System.Boolean,System.Exception,System.String,System.String)">
+            <summary>
+            Write the given message and data to the log handlers.
+            The severity level logged will be <see cref="F:Amber.LoggerSeverity.Fatal"/>.
+            </summary>
+            <param name="message">The message to write. Null is permitted.</param>
+            <param name="data">The object you wish to include in the log data.</param>
+            <param name="enumerateData">If <c>true</c>, the <paramref name="data"/> will be enumerated in the log output.
+            If <c>false</c>, the data will be processed as usual.</param>
+            <param name="e">The exception you wish to include in the log data.</param>
+            <param name="callerFilePath">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+            <param name="callerMemberName">This field is filled in by the compiler. Do not specify a value (simply ignore it).</param>
+        </member>
+        <member name="T:Amber.LoggerSeverity">
+            <summary>
+            Represents a severity level for log messages.
+            </summary>
+        </member>
+        <member name="F:Amber.LoggerSeverity.Debug">
+            <summary>
+            Indicates values used only for debugging and diagnostic purposes.
+            </summary>
+        </member>
+        <member name="F:Amber.LoggerSeverity.Info">
+            <summary>
+            Indicates general process monitoring/instrumenting data.
+            </summary>
+        </member>
+        <member name="F:Amber.LoggerSeverity.Warning">
+            <summary>
+            Indicates a potential misconfiguration or forthcoming error.
+            </summary>
+        </member>
+        <member name="F:Amber.LoggerSeverity.Error">
+            <summary>
+            Indicates a serious failure.
+            </summary>
+        </member>
+        <member name="F:Amber.LoggerSeverity.Fatal">
+            <summary>
+            Indicates a serious failure that the application can not recover from/continue with.
+            </summary>
+        </member>
+        <member name="T:Amber.ILogMessageHandler">
+            <summary>
+            Represents an object that can process and handle messages as they are passed to the <see cref="T:Amber.Log"/>.
+            </summary>
+        </member>
+        <member name="M:Amber.ILogMessageHandler.ProcessMessage(System.String,Amber.LoggerSeverity,System.Exception,System.Object,System.String,System.String)">
+            <summary>
+            Called by the logger when a user attempts to write a log message. This function must process the incoming data
+            in to a single string which will then be 'handled' in <see cref="M:Amber.ILogMessageHandler.HandleProcessedMessage(System.String)"/>.
+            </summary>
+            <param name="message">The user-supplied 'message' string.</param>
+            <param name="messageSeverity">The message severity.</param>
+            <param name="associatedException">The associated exception supplied by the user.
+            Will be <c>null</c> if no exception was given.</param>
+            <param name="associatedData">The associated data supplied by the user.
+            Will be <c>null</c> if no data was given. If the data is an <see cref="T:System.Collections.IEnumerable"/> and the user is
+            requesting this handler to enumerate that data in the log, it will be wrapped in 
+            an <see cref="T:Amber.EnumerationRequestDataWrapper"/>; where the actual data itself is referenced in the
+            <see cref="F:Amber.EnumerationRequestDataWrapper.Enumerable"/> field.</param>
+            <param name="callerFilePath">The file path of the file containing the member that initially
+            called the <see cref="T:Amber.Log"/> method.</param>
+            <param name="callerMemberName">The name of the member that initially called the <see cref="T:Amber.Log"/> method.</param>
+            <returns>A tuple containing:
+            <para>- Whether this handler should continue handling the message,</para>
+            <para>- The message to be handled (may be null).</para>
+            </returns>
+        </member>
+        <member name="M:Amber.ILogMessageHandler.HandleProcessedMessage(System.String)">
+            <summary>
+            Called by the logger when this handler has processed a message and indicated that it should be handled.
+            </summary>
+            <param name="processedMessage">The previously-processed message to handle.</param>
+        </member>
+    </members>
+</doc>
